@@ -85,7 +85,7 @@ if [ "$AIRFLOW__CORE__EXECUTOR" = "CeleryExecutor" ]; then
     : "${REDIS_PROTO:="redis://"}"
     : "${REDIS_HOST:="redis"}"
     : "${REDIS_PORT:="6379"}"
-    : "${REDIS_PASSWORD:=""}"
+    : "${REDIS_PASSWORD:="redispass"}"
     : "${REDIS_DBNUM:="1"}"
 
     # When Redis is secured by basic auth, it does not handle the username part of basic auth, only a token

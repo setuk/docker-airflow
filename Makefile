@@ -13,7 +13,9 @@ up:
 down:
 	$(DC) -f $(CELERY_YAML) down $(c)
 build:
-	$(DC) -f $(CELERY_YAML) build $(c)
+	docker build --rm -t setuk/docker-airflow . && \
+	docker tag setuk/docker-airflow:latest setuk/docker-airflow:1.10.12 && \
+	docker push setuk/docker-airflow:latest
 start:
 	$(DC) -f $(CELERY_YAML) start $(c)
 destroy:
@@ -33,5 +35,13 @@ top:
 	$(DC) -f $(CELERY_YAML) top
 login-postgres:
 	$(DC) -f $(CELERY_YAML) exec postgres /bin/bash
+login-webserver:
+	$(DC) -f $(CELERY_YAML) exec webserver /bin/bash
+login-scheduler:
+	$(DC) -f $(CELERY_YAML) exec scheduler /bin/bash
+login-worker:
+	$(DC) -f $(CELERY_YAML) exec worker /bin/bash
+login-redis:
+	$(DC) -f $(CELERY_YAML) exec redis /bin/bash
 db-shell:
 	$(DC) -f $(CELERY_YAML) exec postgres psql -Upostgres
